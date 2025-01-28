@@ -53,6 +53,12 @@ const execute = async (
     const message = await Messages.findOne({
       where: { messageId }
     });
+    if (!message) {
+      await reply.edit({
+        content: 'I have no thoughts on this message.'
+      });
+      return;
+    }
     const thoughts = await Thoughts.findOne({
       where: { id: message?.thoughtId }
     });
