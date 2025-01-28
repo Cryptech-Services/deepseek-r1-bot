@@ -3,7 +3,7 @@ import Logger from '../util/logger';
 import completion from '../util/completion';
 import { Users, UserMemories, ChannelMemories } from '../db';
 import { Op } from 'sequelize';
-import { Thoughts } from '../db';
+import { Thoughts, Messages } from '../db';
 
 const onMessageCreate = {
   name: Events.MessageCreate,
@@ -132,14 +132,17 @@ const onMessageCreate = {
         }
         for (const messageId of messageIds) {
           const thoughtProcess = thinking.join('\n').trim();
-          await Thoughts.findOrCreate({
+          const thought = await Thoughts.create({
+            content:
+              thoughtProcess.length > 0
+                ? thoughtProcess
+                : 'No thinking was required to answer this message.'
+          });
+          await Messages.findOrCreate({
             where: { messageId },
             defaults: {
               messageId,
-              thought:
-                thoughtProcess.length > 0
-                  ? thoughtProcess
-                  : 'No thinking was required to answer this message.'
+              thoughtId: thought.id
             }
           });
         }

@@ -6,7 +6,7 @@ import {
   MessageFlags,
   PermissionFlagsBits
 } from 'discord.js';
-import { Thoughts, Users } from '../../db';
+import { Messages, Thoughts, Users } from '../../db';
 
 const data = new ContextMenuCommandBuilder()
   .setDefaultMemberPermissions(PermissionFlagsBits.UseApplicationCommands)
@@ -50,24 +50,27 @@ const execute = async (
   }
 
   if (interaction.client.user.id === target) {
-    const thoughts = await Thoughts.findAll({
+    const message = await Messages.findOne({
       where: { messageId }
     });
-    if (!thoughts.length) {
+    const thoughts = await Thoughts.findOne({
+      where: { id: message?.thoughtId }
+    });
+    if (!thoughts) {
       await reply.edit({
         content: 'I have no thoughts on this message.'
       });
       return;
     }
 
-    if (thoughts[0].thought.length > 2000) {
+    if (thoughts.get().content.length > 2000) {
       // send the thought in DM with a link to the message in DM
       const dm = await interaction.user.createDM();
       await dm.send({
         content: `My thought process for ${channel.messages.cache.get(messageId)?.url}`,
         files: [
           {
-            attachment: Buffer.from(thoughts[0].thought),
+            attachment: Buffer.from(thoughts.get().content),
             name: `${messageId}-thought.txt`
           }
         ]
@@ -77,7 +80,7 @@ const execute = async (
       });
     } else {
       await reply.edit({
-        content: thoughts[0].thought
+        content: thoughts.get().content
       });
     }
     return;
