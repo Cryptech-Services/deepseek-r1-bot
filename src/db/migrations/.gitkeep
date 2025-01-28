@@ -1,0 +1,36 @@
+// example migration
+
+module.exports.default = {
+  /**
+   * A description of the migration.
+   *
+   * @param {QueryInterface} queryInterface
+   * @param {Sequelize} sequelize
+   */
+  async up(queryInterface, sequelize) {
+    /**
+     * Add migration commands here.
+     * e.g. await queryInterface.bulkInsert('Users', [{
+     *  username: 'john.doe',
+     * password: 'password',
+     * createdAt: new Date(),
+     * updatedAt: new Date()
+     * }]);
+     */
+  },
+
+  /**
+   * A description of what reverting the migration will do.
+   *
+   * @param {QueryInterface} queryInterface
+   * @param {Sequelize} sequelize
+   */
+  async down(queryInterface, sequelize) {
+    /**
+     * Add commands to revert migration here.
+     *
+     * Example:
+     * await queryInterface.bulkDelete('Users', null, {});
+     */
+  }
+};

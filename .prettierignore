@@ -1,0 +1,13 @@
+node_modules/
+data/
+dist/
+package.json
+package-lock.json
+tsconfig.json
+eslint.config.mjs
+.github/**/**.*
+.prettierrc
+.jshintrc
+.vscode/settings.json
+**/*.md
+!README.md

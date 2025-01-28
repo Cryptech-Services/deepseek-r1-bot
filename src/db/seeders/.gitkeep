@@ -1,0 +1,36 @@
+// example seeder
+
+module.exports.default = {
+  /**
+   * A description of the seeding.
+   *
+   * @param {QueryInterface} queryInterface
+   * @param {Sequelize} sequelize
+   */
+  async up(queryInterface, sequelize) {
+    /**
+     * Add seeding commands here.
+     * e.g. await queryInterface.bulkInsert('Users', [{
+     *  username: 'john.doe',
+     * password: 'password',
+     * createdAt: new Date(),
+     * updatedAt: new Date()
+     * }]);
+     */
+  },
+
+  /**
+   * A description of what reverting the seeder will do.
+   *
+   * @param {QueryInterface} queryInterface
+   * @param {Sequelize} sequelize
+   */
+  async down(queryInterface, sequelize) {
+    /**
+     * Add commands to revert seeder here.
+     *
+     * Example:
+     * await queryInterface.bulkDelete('Users', null, {});
+     */
+  }
+};
