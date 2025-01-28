@@ -3,13 +3,15 @@ import { Users } from './users';
 import { UserMemories } from './user_memories';
 import { ChannelMemories } from './channel_memories';
 import { Thoughts } from './thoughts';
+import { Messages } from './messages';
 
 export const models = {
   Migrations,
   Users,
   UserMemories,
   ChannelMemories,
-  Thoughts
+  Thoughts,
+  Messages
 };
 
 Object.values(models).forEach((model: any) => {
@@ -18,4 +20,4 @@ Object.values(models).forEach((model: any) => {
   }
 });
 
-export { Migrations, Users, UserMemories, ChannelMemories, Thoughts };
+export { Migrations, Users, UserMemories, ChannelMemories, Thoughts, Messages };

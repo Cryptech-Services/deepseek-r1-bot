@@ -6,14 +6,21 @@ import {
   DataTypes
 } from 'sequelize';
 import { sequelize } from '..';
+import { Messages } from './messages';
 
 class Thoughts extends Model<
   InferAttributes<Thoughts>,
   InferCreationAttributes<Thoughts>
 > {
   declare id: CreationOptional<number>;
-  declare messageId: string;
-  declare thought: string;
+  declare content: string;
+
+  static associate() {
+    Thoughts.hasMany(Messages, {
+      foreignKey: 'thoughtId',
+      onDelete: 'CASCADE'
+    });
+  }
 }
 
 Thoughts.init(
@@ -23,11 +30,7 @@ Thoughts.init(
       autoIncrement: true,
       primaryKey: true
     },
-    messageId: {
-      type: new DataTypes.STRING(37),
-      allowNull: false
-    },
-    thought: {
+    content: {
       type: new DataTypes.TEXT(),
       allowNull: false
     }

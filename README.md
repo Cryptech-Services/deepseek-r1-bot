@@ -1,4 +1,4 @@
-# DeepSeek-R1
+# DeepSeek-R1 Bot
 
 A Discord bot which uses DeepSeek-R1.
 
