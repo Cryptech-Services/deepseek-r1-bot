@@ -19,7 +19,8 @@ const loadEvents = () => {
     eventHandlers.push(event);
     events.set(event.name, eventHandlers);
     // Regular expression to match the default export function name
-    const defaultExportRegex = /export\s+default\s+(\w+);/;
+    const defaultExportRegex =
+      /(?:export\s+default\s+|exports\.default\s*=\s*)(\w+);/;
 
     const match = sourceCode.match(defaultExportRegex);
 
